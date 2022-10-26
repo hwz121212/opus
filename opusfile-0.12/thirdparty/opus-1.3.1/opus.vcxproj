@@ -11,21 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{97172F8B-59B6-3B45-A4F8-A30EBC997D96}</ProjectGuid>
+    <ProjectGuid>{24B6E49C-798A-474D-B84B-0E24F4B03AC4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
-    <ProjectName>libopus</ProjectName>
+    <ProjectName>opus</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
@@ -38,9 +38,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)lib\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Temp\$(SolutionName)\$(ProjectName)\$(Configuration)\</IntDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)lib\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Temp\$(SolutionName)\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -57,7 +57,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;ENABLE_HARDENING;USE_ALLOCA;CUSTOM_MODES;FIXED_POINT=1;OPUS_HAVE_RTCD;OPUS_X86_MAY_HAVE_SSE;OPUS_X86_PRESUME_SSE;OPUS_X86_MAY_HAVE_SSE2;OPUS_X86_PRESUME_SSE2;OPUS_X86_MAY_HAVE_SSE4_1;OPUS_X86_PRESUME_SSE4_1;HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OPUS_BUILD;DLL_EXPORT;WIN32;_WINDOWS;ENABLE_HARDENING;USE_ALLOCA;CUSTOM_MODES;FIXED_POINT=1;OPUS_HAVE_RTCD;OPUS_X86_MAY_HAVE_SSE;OPUS_X86_PRESUME_SSE;OPUS_X86_MAY_HAVE_SSE2;OPUS_X86_PRESUME_SSE2;OPUS_X86_MAY_HAVE_SSE4_1;OPUS_X86_PRESUME_SSE4_1;HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     
     
@@ -65,6 +65,10 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <AdditionalLibraryDirectories />
     </Lib>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\</AdditionalLibraryDirectories>
+      <ImportLibrary>$(SolutionDir)\lib\$(Configuration)\$(TargetName).lib</ImportLibrary>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -78,7 +82,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;ENABLE_HARDENING;USE_ALLOCA;CUSTOM_MODES;FIXED_POINT=1;OPUS_HAVE_RTCD;OPUS_X86_MAY_HAVE_SSE;OPUS_X86_PRESUME_SSE;OPUS_X86_MAY_HAVE_SSE2;OPUS_X86_PRESUME_SSE2;OPUS_X86_MAY_HAVE_SSE4_1;OPUS_X86_PRESUME_SSE4_1;HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OPUS_BUILD;DLL_EXPORT;WIN32;_WINDOWS;NDEBUG;ENABLE_HARDENING;USE_ALLOCA;CUSTOM_MODES;FIXED_POINT=1;OPUS_HAVE_RTCD;OPUS_X86_MAY_HAVE_SSE;OPUS_X86_PRESUME_SSE;OPUS_X86_MAY_HAVE_SSE2;OPUS_X86_PRESUME_SSE2;OPUS_X86_MAY_HAVE_SSE4_1;OPUS_X86_PRESUME_SSE4_1;HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
@@ -88,6 +92,10 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <AdditionalLibraryDirectories />
     </Lib>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\</AdditionalLibraryDirectories>
+      <ImportLibrary>$(SolutionDir)\lib\$(Configuration)\$(TargetName).lib</ImportLibrary>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\opus.h" />

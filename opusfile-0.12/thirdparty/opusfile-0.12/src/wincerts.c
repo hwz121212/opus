@@ -32,6 +32,9 @@
 # include <openssl/ssl.h>
 # include <openssl/err.h>
 # include <openssl/x509.h>
+#include "x509/x509_local.h"
+#include "crypto/x509.h"
+
 
 static int op_capi_new(X509_LOOKUP *_lu){
   HCERTSTORE h_store;
@@ -58,9 +61,9 @@ static void op_capi_free(X509_LOOKUP *_lu){
 static int op_capi_retrieve_by_subject(X509_LOOKUP *_lu,int _type,
  X509_NAME *_name,X509_OBJECT *_ret){
   X509_OBJECT *obj;
-  CRYPTO_w_lock(CRYPTO_LOCK_X509_STORE);
+  //CRYPTO_w_lock(CRYPTO_EX_INDEX_X509_STORE);
   obj=X509_OBJECT_retrieve_by_subject(_lu->store_ctx->objs,_type,_name);
-  CRYPTO_w_unlock(CRYPTO_LOCK_X509_STORE);
+ // CRYPTO_w_unlock(CRYPTO_EX_INDEX_X509_STORE);
   if(obj!=NULL){
     _ret->type=obj->type;
     memcpy(&_ret->data,&obj->data,sizeof(_ret->data));
